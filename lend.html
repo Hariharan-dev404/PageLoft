@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lend Book</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      background-color: lightcoral;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+
+    .pageloft-title {
+      flex: 1;
+      text-align: center;
+      font-size: 50px;
+      font-weight: bold;
+      color: white;
+      position: relative;
+      right: 522px;
+    }
+
+    .lend-container {
+      max-width: 500px;
+      margin: 80px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .lend-container h2 {
+      color: lightcoral;
+      text-align: center;
+    }
+
+    .lend-container label {
+      font-size: 18px;
+      color: #444;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .lend-container input,
+    .lend-container select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    .lend-container button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: lightcoral;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .lend-container button:hover {
+      background-color: #e6645c;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: lightcoral;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
+    
+    textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  resize: vertical; 
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="obl.jpg" alt="Logo" class="logo">
+    <div class="pageloft-title">PageLoft</div>
+  </div>
+
+  <div class="lend-container">
+    <h2>Lend This Book</h2>
+    <form action="loader.html" method="get">
+    <input type="hidden" name="type" value="lend" required>
+      <h2 id="book-title"></h2>
+      <p id="book-author"></p>
+      <p id="book-price"></p>
+      <img id="book-image" width="200" /><br><br>
+
+      <label for="weeks">Lend Duration (in weeks)</label>
+      <select id="weeks" required>
+        <option value="">Select weeks</option>
+        <option value="1">1 Week</option>
+        <option value="2">2 Weeks</option>
+        <option value="3">3 Weeks</option>
+        <option value="4">4 Weeks</option>
+      </select>
+
+      <label for="username">Your Name</label>
+      <input type="text" id="username" placeholder="Enter your name"  required />
+      
+      <label for="mobileno">Mobile No</label>
+      <input type="tel" id="mobileno" placeholder="Enter your number" required />
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your Email " required />
+
+      <label for="address">Address</label>
+      <textarea  id="address" placeholder="Enter the Address of your house to dispatch the package " row="20" cols ="20"></textarea>
+
+      <button  type="submit">Confirm Lend</button>
+    </form>
+  </div>
+
+  <div class="footer">
+    © 2025 All rights reserved.
+  </div>
+</body>
+<script>
+    window.onload = function () {
+      const params = new URLSearchParams(window.location.search);
+      const title = params.get("title");
+      const author = params.get("author");
+      const image = params.get("image");
+      const price = params.get("price");
+  
+      document.getElementById("book-title").textContent = title;
+      document.getElementById("book-author").textContent = "by " + author;
+      document.getElementById("book-price").textContent = "Price: ₹" + price;
+      document.getElementById("book-image").src = image;
+    };
+  </script>
+</html>

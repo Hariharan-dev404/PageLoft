@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Book Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+    }
+  
+    .header {
+      background-color: lightcoral;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+    }
+  
+    .container {
+      padding: 30px;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  
+    th, td {
+      padding: 12px 20px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+  
+    th {
+      background-color: lightcoral;
+      color: white;
+    }
+  
+    .action button{
+      padding: 12px;
+      background-color: lightcoral;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  
+    .action button:hover {
+      background-color: #e6645c;
+    }
+  
+    .edit-btn {
+      background-color: orange;
+      padding:10px;
+      border-radius: 10px;
+      color: white;
+      border: 1px none;
+    }
+  
+    .delete-btn {
+      background-color: crimson;
+      padding:10px;
+      border-radius: 10px;
+      color: white;
+      border: 1px none;
+    }
+  
+    .status-available {
+      color: green;
+      font-weight: bold;
+    }
+  
+    .status-borrowed {
+      color: red;
+      font-weight: bold;
+    }
+  
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 15px;
+      background-color: lightcoral;
+      color: white;
+    }
+  
+    .inputs {
+      margin: 20px;
+    }
+  
+    .inputs input[type=text] {
+      padding: 8px;
+      margin-right: 10px;
+    }
+    .des{
+      margin: 10px;
+    }
+    .des h3{
+      color:lightcoral;
+    }
+    .des label{
+      color: lightcoral;
+    }
+    .des input{
+      padding: 10px;
+    }
+    .des button{
+      padding:10px;
+      background-color: lightcoral;
+      border:none;
+      border-radius: 10px;
+      color:white;
+      cursor: pointer;
+    }
+    .des button:hover{
+      background-color:  #e6645c;
+    }
+  
+    /* 📱 Mobile & Tablet Responsive */
+    @media (max-width: 768px) {
+      .header {
+        font-size: 22px;
+        padding: 15px;
+      }
+      .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .inputs input[type=text], 
+      .action button {
+        width: 100%;
+        margin-right: 0;
+      }
+      table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+      }
+      thead {
+        display: none;
+      }
+      tr {
+        margin-bottom: 15px;
+        background: white;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        padding: 10px;
+      }
+      td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-right: 10px;
+        font-weight: bold;
+        text-align: left;
+        color: lightcoral;
+      }
+      .edit-btn, .delete-btn {
+        width: 48%;
+        margin: 2px 1%;
+        font-size: 14px;
+        padding: 8px;
+      }
+      .container {
+        padding: 10px;
+      }
+      #editModal {
+        width: 90%;
+        left: 5% !important;
+        top: 10% !important;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+
+  <div class="header">Admin Dashboard - Book Inventory</div>
+  <h4>press Esc to back to home</h4>
+  <div class="inputs">
+    <div class="action">
+    <input type="text" id="book_title" placeholder="Book Title">
+    <input type="text" id="book_author" placeholder="Book Author">
+    <input type="text" id="book_genre" placeholder="Book Genre">
+    <input type="text" id="book_status" placeholder="Book Status">  <button  class="actions" id="addRowBtn">Add Row</button>   
+    </div>
+  </div>
+
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="bookTable">
+        <tr id="row0">
+            <td>To Kill a Mockingbird</td>
+            <td>Harper Lee</td>
+            <td>Fiction</td>
+            <td>Borrowed</td>
+            <td>
+                <button class="edit-btn"  data-id="row0">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </td>
+          </tr>
+          <tr id="row1">
+            <td>The Great Gatsby</td>
+            <td>Scott Fitzgerald</td>
+            <td>Fiction</td>
+            <td>Available</td>
+            <td>
+                <button class="edit-btn" data-id="row1">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </td>
+          </tr>
+          <tr id="row2">
+            <td>Pride and Prejudice</td>
+            <td>Jane Austen</td>
+            <td>Fiction</td>
+            <td>Borrowed</td>
+            <td>
+                <button class="edit-btn" data-id="row2">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </td>
+          </tr>
+          <tr id="row3">
+            <td>Harry Potter</td>
+            <td>J.K.Rowling</td>
+            <td>Fantasy</td>
+            <td>Not Available</td>
+            <td>
+                <button class="edit-btn" data-id="row3">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+
+<div id="editModal" style="display:none; position:fixed; top:20%; left:35%; background:white; padding:20px; border:1px solid #ccc; box-shadow:0 0 10px #aaa; z-index:1000;">
+    <div class="des">
+    <div id="modalHeader"  font-weight:bold;>
+      <span id="closeModal" style="float:right; cursor:pointer; font-size:18px;">&times;</span>
+      <h3>Edit</h3>
+    </div>
+    <label>Title:</label><br>
+    <input type="text" id="editTitle"><br><br>
+    <label>Author:</label><br>
+    <input type="text" id="editAuthor"><br><br>
+    <label>Genre:</label><br>
+    <input type="text" id="editGenre"><br><br>
+    <label>Status:</label><br>
+    <input type="text" id="editStatus"><br><br>
+    <button id="saveChangesBtn" >Save</button>
+  </div>
+  </div>
+  <div class="footer">© 2025 PageLoft Admin Panel</div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    let rowid = 4; 
+    let currentEditRow = null;
+    let isDragging = false;
+    let offset = { x: 0, y: 0 };
+  
+    $(document).ready(function () {
+      // Add new row
+      $("#addRowBtn").click(function () {
+        const title = $("#book_title").val();
+        const author = $("#book_author").val();
+        const genre = $("#book_genre").val();
+        const status = $("#book_status").val();
+        const $row = $(
+          `<tr id="row${rowid}">
+            <td>${title}</td>
+            <td>${author}</td>
+            <td>${genre}</td>
+            <td>${status}</td>
+            <td>
+              <button class="edit-btn" data-id="row${rowid}">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </td>
+          </tr>`
+        );
+  
+        $("#bookTable").append($row);
+        rowid++;
+  
+        $("#book_title").val("");
+        $("#book_author").val("");
+        $("#book_genre").val("");
+        $("#book_status").val("");
+      });
+  
+      // Edit button
+      $("#bookTable").on("click", ".edit-btn", function () {
+        const rowId = $(this).data("id");
+        const $row = $("#" + rowId);
+        const $tds = $row.find("td");
+  
+        currentEditRow = $row;
+  
+        $("#editTitle").val($($tds[0]).text().trim());
+        $("#editAuthor").val($($tds[1]).text().trim());
+        $("#editGenre").val($($tds[2]).text().trim());
+        $("#editStatus").val($($tds[3]).text().trim());
+  
+        $("#editModal").fadeIn();
+      });
+  
+      // Close modal
+      $("#closeModal").click(function () {
+        $("#editModal").fadeOut();
+      });
+  
+      // Save changes
+      $("#saveChangesBtn").click(function () {
+        if (currentEditRow) {
+          const $tds = currentEditRow.find("td");
+          $($tds[0]).text($("#editTitle").val().trim());
+          $($tds[1]).text($("#editAuthor").val().trim());
+          $($tds[2]).text($("#editGenre").val().trim());
+          $($tds[3]).text($("#editStatus").val().trim());
+        }
+        $("#editModal").fadeOut();
+      });
+  
+      // Delete button
+      $("#bookTable").on("click", ".delete-btn", function () {
+        if (confirm("Are you sure you want to delete this book?")) {
+          $(this).closest("tr").remove();
+        }
+      });
+  
+      // Dragging logic for modal
+      $("#editModal").on("mousedown", function (e) {
+        if (e.target.id === "editModal" || e.target.id === "modalHeader") {
+          isDragging = true;
+          offset.x = e.clientX - $(this).offset().left;
+          offset.y = e.clientY - $(this).offset().top;
+        }
+      });
+  
+      $(document).on("mousemove", function (e) {
+        if (isDragging) {
+          $("#editModal").css({
+            left: e.clientX - offset.x + "px",
+            top: e.clientY - offset.y + "px"
+          });
+        }
+      });
+  
+      $(document).on("mouseup", function () {
+        isDragging = false;
+      });
+    });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      window.location.href = "adminuser.html"; 
+    }
+  });
+</script>
+  
+</body>
+</html>

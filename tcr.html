@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Catcher in the Rye</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8f5;
+      margin: 0;
+      padding: 0px;
+    }
+    .header {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      background-color: lightcoral;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+    .pageloft-title {
+      flex: 1;
+      text-align: center;
+      font-size: 50px;
+      font-weight: bold;
+      color: white;
+      position: relative;
+      right: 530px;
+    }
+    .container {
+      display: flex;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .book-image {
+      flex: 0 0 180px;
+    }
+    .book-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .book-details {
+      margin-left: 30px;
+      flex: 1;
+    }
+    .book-title {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .book-author {
+      font-size: 18px;
+      color: #777;
+      margin-bottom: 6px;
+    }
+    .book-rating {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 14px;
+    }
+    .book-description {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .action-buttons {
+      margin-top: 20px;
+      padding: 10px 18px;
+      font-size: 16px;
+      background-color: lightcoral;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      margin-right: 12px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .action-buttons:hover {
+      background-color: #e6645c;
+    }
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: lightcoral;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    /* 📱 Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      .pageloft-title {
+        right: 0;
+        font-size: 28px;
+      }
+      .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+      }
+      .book-image {
+        flex: none;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      .book-details {
+        margin-left: 0;
+      }
+      .action-buttons {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .footer {
+        position: static;
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="obl.jpg" alt="Logo" class="logo">
+    <div class="pageloft-title">PageLoft</div>
+  </div>
+
+  <div class="container">
+    <div class="book-image">
+      <img src="https://m.media-amazon.com/images/I/81OthjkJBuL._AC_UF1000,1000_QL80_.jpg" alt="The Catcher in the Rye">
+    </div>
+    <div class="book-details">
+      <h1 class="book-title">The Catcher in the Rye</h1>
+      <p class="book-author">by J.D. Salinger</p>
+      <p class="book-rating">Rating: 4.3/5</p>
+      <p class="book-description">
+        Holden Caulfield recounts his experiences over a few days in New York City, grappling with isolation, loss, and identity. The novel captures teenage rebellion and the struggle to find one's place in a conformist society. Salinger's iconic work remains a landmark in coming-of-age literature.
+      </p>
+      <div class="actions">
+        <button class="action-buttons" onclick="redirect('buy')"
+        data-title="The Catcher in the Rye"
+        data-author="by J.D. Salinger"
+        data-image="https://m.media-amazon.com/images/I/81OthjkJBuL._AC_UF1000,1000_QL80_.jpg"
+        data-price="360">Buy</button>
+
+        <button class="action-buttons" onclick="redirect('lend')"
+        data-title="The Catcher in the Rye"
+        data-author="by J.D. Salinger"
+        data-image="https://m.media-amazon.com/images/I/81OthjkJBuL._AC_UF1000,1000_QL80_.jpg">Lend</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2025 All rights reserved.
+  </div>
+
+  <script>
+    function redirect(action) {
+      const button = event.target;
+      const title = encodeURIComponent(button.getAttribute("data-title"));
+      const author = encodeURIComponent(button.getAttribute("data-author"));
+      const image = encodeURIComponent(button.getAttribute("data-image"));
+      const price = encodeURIComponent(button.getAttribute("data-price"));
+      const url = `${action}.html?title=${title}&author=${author}&image=${image}&price=${price}`;
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>

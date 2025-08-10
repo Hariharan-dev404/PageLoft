@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Great Gatsby</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8f5;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      background-color: lightcoral;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+    .pageloft-title {
+      flex: 1;
+      text-align: center;
+      font-size: 50px;
+      font-weight: bold;
+      color: white;
+      position: relative;
+      right: 530px;
+    }
+    .container {
+      display: flex;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 20px;
+    }
+    .book-img {
+      width: 250px;
+      height: auto;
+      border-radius: 10px;
+      margin-right: 30px;
+    }
+    .details {
+      flex: 1;
+    }
+    .details h1 {
+      margin: 0;
+      font-size: 28px;
+      color: lightcoral;
+    }
+    .author {
+      font-size: 18px;
+      color: #777;
+      margin: 10px 0;
+    }
+    .rating {
+      font-size: 16px;
+      color: #555;
+    }
+    .description {
+      margin-top: 15px;
+      font-size: 15px;
+      color: #333;
+      line-height: 1.6;
+    }
+    .action-buttons {
+      margin-top: 20px;
+      padding: 10px 18px;
+      font-size: 16px;
+      background-color: lightcoral;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      margin-right: 12px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .action-buttons:hover {
+      background-color: #e6645c;
+    }
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: lightcoral;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .book-img {
+        width: 180px;
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+      .pageloft-title {
+        font-size: 32px;
+        right: 0;
+      }
+      .header {
+        flex-direction: column;
+        align-items: center;
+      }
+      .logo {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .book-img {
+        width: 140px;
+      }
+      .details h1 {
+        font-size: 22px;
+      }
+      .author, .rating, .description {
+        font-size: 14px;
+      }
+      .action-buttons {
+        font-size: 14px;
+        padding: 8px 14px;
+      }
+      .footer {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="obl.jpg" alt="Logo" class="logo">
+    <div class="pageloft-title">PageLoft</div>
+  </div>
+
+  <div class="container">
+    <img class="book-img" src="https://m.media-amazon.com/images/I/81af+MCATTL._AC_UF1000,1000_QL80_.jpg" alt="The Great Gatsby">
+    <div class="details">
+      <h1>The Great Gatsby</h1>
+      <p class="author">by F. Scott Fitzgerald</p>
+      <p class="rating">Rating: 4.5/5</p>
+      <p class="description">
+        Set in the Roaring Twenties, The Great Gatsby explores themes of decadence, idealism,
+        resistance to change, and excess. The novel centers on Jay Gatsby's unrelenting passion
+        for Daisy Buchanan and his pursuit of the American Dream. Fitzgerald paints a haunting
+        portrait of wealth and hollow opulence.
+      </p>
+      <div class="buttons">
+        <button class="action-buttons" onclick="redirect('buy')"
+          data-title="The Great Gatsby"
+          data-author="by F. Scott Fitzgerald"
+          data-image="https://m.media-amazon.com/images/I/81af+MCATTL._AC_UF1000,1000_QL80_.jpg"
+          data-price="650"
+        >Buy</button>
+
+        <button class="action-buttons" onclick="redirect('lend')"
+          data-title="The Great Gatsby"
+          data-author="by F. Scott Fitzgerald"
+          data-image="https://m.media-amazon.com/images/I/81af+MCATTL._AC_UF1000,1000_QL80_.jpg"
+        >Lend</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2025 All rights reserved.
+  </div>
+
+  <script>
+    function redirect(action) {
+      const button = event.target;
+      const title = encodeURIComponent(button.getAttribute("data-title"));
+      const author = encodeURIComponent(button.getAttribute("data-author"));
+      const image = encodeURIComponent(button.getAttribute("data-image"));
+      const price = encodeURIComponent(button.getAttribute("data-price"));
+      const url = `${action}.html?title=${title}&author=${author}&image=${image}&price=${price}`;
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>
