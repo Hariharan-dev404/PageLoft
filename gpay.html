@@ -63,7 +63,7 @@
       color: #555;
     }
 
-    input[type="text"] {
+    input {
       width: 100%;
       padding: 12px;
       font-size: 16px;
@@ -112,9 +112,9 @@
     <img src="https://www.liblogo.com/img-logo/go8825f71a-google-pay-logo-file-google-pay-gpay-logo-2018-2020-svg-liblogo.png" alt="Google Pay" class="gpay-logo">
     <h2>Pay with Google Pay</h2>
     <input type="hidden" name="type" value="gpay" required>
-    <input type="text" placeholder="Enter the amount" required>
+    <input type="number" placeholder="Enter the amount" required>
     
-    <input type="text" placeholder="Enter your UPI ID (e.g., yourname@okhdfcbank)" required>
+    <input type="email" placeholder="Enter your UPI ID (e.g., yourname@okhdfcbank)" required>
    <button class="pay-button">Pay Now</button>
   </div>
   <div class="footer">
@@ -123,3 +123,4 @@
 
 </body>
 </html>
+
